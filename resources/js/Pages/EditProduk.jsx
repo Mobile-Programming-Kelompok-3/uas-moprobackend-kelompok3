@@ -1,10 +1,10 @@
 import { Listbox, Transition } from "@headlessui/react";
-
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Inertia } from "@inertiajs/inertia";
 
-export default function AddProduk({ props, visible, onClose, options }) {
+
+export default function EditProduk({ props, visible, onClose, options, editData }) {
     const [name, setName] = useState("");
     const [kategori, setKategori] = useState(options[0]);
     const [harga, setHarga] = useState(0);
@@ -12,20 +12,32 @@ export default function AddProduk({ props, visible, onClose, options }) {
     const [gambar, setGambar] = useState("");
     const [total, setTotal] = useState(0);
 
+
+    console.log(editData);
+    useEffect(() => {
+        if (editData) {
+            setName(editData.name);
+            setKategori(editData.kategori);
+            setHarga(editData.harga);
+            setDeskripsi(editData.deskripsi);
+            setGambar(editData.gambar);
+            setTotal(editData.total);
+        }
+    }, [editData]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
-          name,
-          kategori,
-          harga,
-          deskripsi,
-          total,
-          gambar,
+            name,
+            kategori,
+            harga,
+            deskripsi,
+            total,
+            gambar,
         };
-      
-        Inertia.post("/addproduk", data);
-          
-      };
+        Inertia.put(`/produk/${editData.id}/edit`, data);
+
+    };
 
     if (!visible) return null;
 
@@ -40,7 +52,7 @@ export default function AddProduk({ props, visible, onClose, options }) {
                     <div className="bg-white p-8 rounded-md shadow-md">
                         <div className="justify-between flex items-start">
                             <h1 className="text-left font-bold text-[48px] text-black mb-4">
-                                Tambah Produk
+                                Edit Produk
                             </h1>
                             <button
                                 onClick={onClose}
@@ -189,7 +201,7 @@ export default function AddProduk({ props, visible, onClose, options }) {
                                 type="submit"
                                 className="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-800 focus:bg-blue-400 focus:outline-none transition duration-150 ease-in-out"
                             >
-                                Tambah Produk
+                                Edit Produk
                             </button>
                         </form>
                     </div>

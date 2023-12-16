@@ -29,12 +29,16 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Beranda');
-});
+})->name('home');
 
-Route::get('/user', [UserController::class, 'show'])->name('users');
-Route::get('/produk', [ProdukController::class, 'show'])->name('produk');
-Route::get('/produksend', [ProdukController::class, 'send'])->name('produk');
-Route::get('/produksend/{produkid}', [ProdukController::class, 'sendid'])->name('produkid');
+
+Route::get('/user', [UserController::class, 'show']);
+Route::get('/produk', [ProdukController::class, 'show'])->name('listproduk');
+Route::post('/addproduk', [ProdukController::class, 'addproduk']);
+Route::put('/produk/{produk}/edit', [ProdukController::class, 'update']);
+Route::delete('/produk/{produk}/delete', [ProdukController::class, 'destroy'])->name('deleteproduk');
+Route::get('/produksend', [ProdukController::class, 'send']);
+Route::get('/produksend/{produkid}', [ProdukController::class, 'sendid']);
 
 Route::get('/home', function (){
     return Inertia::render('screens/Homescreen');

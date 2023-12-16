@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use App\Models\ProdukKategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class ProdukController extends Controller
@@ -30,7 +31,7 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -45,6 +46,43 @@ class ProdukController extends Controller
             'kategori' => $kategori,
         ]);
     }
+
+
+    public function addproduk(Request $request)
+{
+    try {
+        
+        $request->validate([
+            'name' => 'required',
+            'kategori' => 'required',
+            'harga' => 'required',
+            'deskripsi' => 'required',
+            'total' => 'required',
+            'gambar' => 'required',
+        ]);
+        
+        $produkKategori = ProdukKategori::where('nama', $request->kategori)->first();
+        
+
+        if (!$produkKategori) {
+            throw new \Exception('Kategori tidak ditemukan');
+        }
+
+        Produk::create([
+            'name' => $request->input('name'),
+            'harga' => $request->input('harga'),
+            'deskripsi' => $request->input('deskripsi'),
+            'gambar' => $request->input('gambar'),
+            'total' => $request->input('total'),
+            'produk_kategoris_id' => $produkKategori->id,
+        ]);
+        
+        return redirect()->back()->with('success', 'Produk berhasil ditambahkan');
+    } catch (\Exception $e) {
+        
+    }
+}
+
 
     public function send(Produk $produk)
     {
@@ -75,16 +113,48 @@ class ProdukController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produk $produk)
-    {
-        //
+    public function update(Request $request, $produkid)
+{
+    try {
+        $produk = Produk::findOrFail($produkid);
+
+        $request->validate([
+            'name' => 'required',
+            'kategori' => 'required',
+            'harga' => 'required',
+            'deskripsi' => 'required',
+            'total' => 'required',
+            'gambar' => 'required',
+        ]);
+
+        $produkKategori = ProdukKategori::where('nama', $request->kategori)->first();
+
+        if (!$produkKategori) {
+            throw new \Exception('Kategori tidak ditemukan');
+        }
+
+        $produk->update([
+            'name' => $request->input('name'),
+            'harga' => $request->input('harga'),
+            'deskripsi' => $request->input('deskripsi'),
+            'gambar' => $request->input('gambar'),
+            'total' => $request->input('total'),
+            'produk_kategoris_id' => $produkKategori->id,
+        ]);
+
+        return redirect()->back()->with('success', 'Produk berhasil diperbarui');
+    } catch (\Exception $e) {
+        return redirect()->back()->withErrors([$e->getMessage()]);
     }
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Produk $produk)
+    public function destroy($produkid)
     {
-        //
+        $produk = Produk::find($produkid);
+        $produk->delete();
+        return inertia::location(route('listproduk'));
     }
 }
