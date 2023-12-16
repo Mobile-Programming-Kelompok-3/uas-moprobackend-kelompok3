@@ -16,9 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->integer('harga');
             $table->text('deskripsi');
-            $table->unsignedBigInteger('produk_kategoris_id');
-            $table->foreign('produk_kategoris_id')->references('id')->on('produk_kategoris')->onDelete('cascade');
-            $table->integer('total');
             $table->string('gambar');
             $table->timestamps();
         });

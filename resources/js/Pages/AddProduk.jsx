@@ -4,34 +4,52 @@ import React, { Fragment, useState } from "react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Inertia } from "@inertiajs/inertia";
 
-export default function AddProduk({ props, visible, onClose, options }) {
+export default function AddProduk({ props, visible, onClose }) {
     const [name, setName] = useState("");
-    const [kategori, setKategori] = useState(options[0]);
     const [harga, setHarga] = useState(0);
     const [deskripsi, setDeskripsi] = useState("");
-    const [gambar, setGambar] = useState("");
-    const [total, setTotal] = useState(0);
+    const [gambar, setGambar] = useState(null); // Gunakan null untuk menyimpan file
 
-    const handleSubmit = (e) => {
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setGambar(file);
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = {
-          name,
-          kategori,
-          harga,
-          deskripsi,
-          total,
-          gambar,
-        };
-      
-        Inertia.post("/addproduk", data);
-          
-      };
+
+        const formData = new FormData();
+        formData.append('image', gambar);
+
+        try {
+            const response = await fetch('https://api.imgbb.com/1/upload?key=8e6f029993635453c67071f5f258cd87', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to upload image');
+            }
+
+            const data = await response.json();
+            const imageUrl = data.data.url;
+
+            // Simpan data produk beserta URL gambar ke backend (gunakan endpoint yang sesuai)
+            const dataProduk = {
+                name,
+                harga,
+                deskripsi,
+                gambar: imageUrl
+            };
+
+            await Inertia.post("/addproduk", dataProduk);
+            window.location.reload(); // Atau lakukan navigasi yang sesuai setelah menambahkan produk
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     if (!visible) return null;
-
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(" ");
-    }
 
     return (
         <>
@@ -70,90 +88,6 @@ export default function AddProduk({ props, visible, onClose, options }) {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
-                            <Listbox value={kategori} onChange={setKategori}>
-                                {({ open }) => (
-                                    <>
-                                        <div className="relative mt-1">
-                                            <Listbox.Button className="relative w-full cursor-default rounded-xl border border-black bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm">
-                                                <span className="block truncate text-lg">
-                                                    {kategori}
-                                                </span>
-                                                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                                                    <ChevronUpDownIcon
-                                                        className="h-5 w-5 text-gray-400"
-                                                        aria-hidden="true"
-                                                    />
-                                                </span>
-                                            </Listbox.Button>
-
-                                            <Transition
-                                                show={open}
-                                                as={Fragment}
-                                                leave="transition ease-in duration-100"
-                                                leaveFrom="opacity-100"
-                                                leaveTo="opacity-0"
-                                            >
-                                                <Listbox.Options className="absolute text-left z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                                    {options.map(
-                                                        (option, index) => (
-                                                            <Listbox.Option
-                                                                key={index}
-                                                                className={({
-                                                                    active,
-                                                                }) =>
-                                                                    classNames(
-                                                                        active
-                                                                            ? "text-white bg-blue-600"
-                                                                            : "text-gray-900",
-                                                                        "relative cursor-default select-none py-2 pl-3 pr-9"
-                                                                    )
-                                                                }
-                                                                value={option}
-                                                            >
-                                                                {({
-                                                                    kategori,
-                                                                    active,
-                                                                }) => (
-                                                                    <>
-                                                                        <span
-                                                                            className={classNames(
-                                                                                kategori
-                                                                                    ? "font-semibold"
-                                                                                    : "font-normal",
-                                                                                "block truncate"
-                                                                            )}
-                                                                        >
-                                                                            {
-                                                                                option
-                                                                            }
-                                                                        </span>
-
-                                                                        {kategori ? (
-                                                                            <span
-                                                                                className={classNames(
-                                                                                    active
-                                                                                        ? "text-white"
-                                                                                        : "text-blue-600",
-                                                                                    "absolute inset-y-0 right-0 flex items-center pr-4"
-                                                                                )}
-                                                                            >
-                                                                                <CheckIcon
-                                                                                    className="h-5 w-5"
-                                                                                    aria-hidden="true"
-                                                                                />
-                                                                            </span>
-                                                                        ) : null}
-                                                                    </>
-                                                                )}
-                                                            </Listbox.Option>
-                                                        )
-                                                    )}
-                                                </Listbox.Options>
-                                            </Transition>
-                                        </div>
-                                    </>
-                                )}
-                            </Listbox>
                             <input
                                 className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-blue-500"
                                 type="number"
@@ -170,19 +104,8 @@ export default function AddProduk({ props, visible, onClose, options }) {
                                 onChange={(e) => setDeskripsi(e.target.value)}
                             ></textarea>
                             <input
-                                className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-blue-500"
-                                type="number"
-                                placeholder="Total"
-                                value={total}
-                                onChange={(e) =>
-                                    setTotal(Number(e.target.value))
-                                }
-                            />
-                            <input
-                                className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-blue-500"
-                                type="text"
-                                value={gambar}
-                                onChange={(e) => setGambar(e.target.value)}
+                                type="file"
+                                onChange={handleFileChange}
                             />
                             <button
 
