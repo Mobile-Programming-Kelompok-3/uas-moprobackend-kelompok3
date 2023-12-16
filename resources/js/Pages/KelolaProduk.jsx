@@ -8,9 +8,19 @@ import { Inertia } from "@inertiajs/inertia";
 export default function KelolaProduk(props) {
     const [isAddProdukVisible, setAddProdukVisible] = useState(false);
     const [isEditProdukVisible, setEditProdukVisible] = useState(false);
-
+    const kategoriNames = {
+        1: "Makanan",
+        2: "Minuman",
+        3: "Kebutuhan Dapur",
+        4: "Kebutuhan Kesehatan",
+        5: "Personal Care",
+        // Add more mappings as needed
+    };
     const [ProdukId, setProdukId] = useState(0);
+    const kategori = props.kategori;
 
+    let options = kategori.map((kategori) => kategori.nama);
+    console.log(kategori);
     const removeProduk = (id) => {
         if (
             confirm(
@@ -54,7 +64,9 @@ export default function KelolaProduk(props) {
                                         <th scope="col" className="px-6 py-3">
                                             Nama
                                         </th>
-
+                                        <th scope="col" className="px-6 py-3">
+                                            kategori
+                                        </th>
                                         <th scope="col" className="px-6 py-3">
                                             harga
                                         </th>
@@ -82,6 +94,14 @@ export default function KelolaProduk(props) {
                                                 >
                                                     {item.name}
                                                 </td>
+                                                <td
+                                                    scope="row"
+                                                    className="px-6 py-4 font-medium"
+                                                >
+                                                    {kategoriNames[
+                                                        item.produk_kategoris_id
+                                                    ] || "Unknown"}
+                                                </td>
                                                 <td className="px-6 py-4">
                                                     <h1>Rp. {item.harga}</h1>
                                                 </td>
@@ -107,10 +127,12 @@ export default function KelolaProduk(props) {
                     <AddProduk
                         visible={isAddProdukVisible}
                         onClose={() => setAddProdukVisible(false)}
+                        options={options}
                     />
                     <EditProduk
                         visible={isEditProdukVisible}
                         onClose={() => setEditProdukVisible(false)}
+                        options={options}
                         editData={props.produk.find(
                             (pro) => pro.id === ProdukId
                         )}

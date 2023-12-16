@@ -4,9 +4,10 @@ import React, { Fragment, useState } from "react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Inertia } from "@inertiajs/inertia";
 
-export default function AddProduk({ props, visible, onClose }) {
+export default function AddProduk({ props, visible, onClose, options }) {
     const [name, setName] = useState("");
     const [harga, setHarga] = useState(0);
+    const [kategori, setKategori] = useState(options[0]);
     const [deskripsi, setDeskripsi] = useState("");
     const [gambar, setGambar] = useState(null); // Gunakan null untuk menyimpan file
 
@@ -37,6 +38,7 @@ export default function AddProduk({ props, visible, onClose }) {
             // Simpan data produk beserta URL gambar ke backend (gunakan endpoint yang sesuai)
             const dataProduk = {
                 name,
+                kategori,
                 harga,
                 deskripsi,
                 gambar: imageUrl
@@ -50,6 +52,10 @@ export default function AddProduk({ props, visible, onClose }) {
     };
 
     if (!visible) return null;
+
+    function classNames(...classes) {
+        return classes.filter(Boolean).join(" ");
+    }
 
     return (
         <>
@@ -88,6 +94,90 @@ export default function AddProduk({ props, visible, onClose }) {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
+                            <Listbox value={kategori} onChange={setKategori}>
+                                {({ open }) => (
+                                    <>
+                                        <div className="relative mt-1">
+                                            <Listbox.Button className="relative w-full cursor-default rounded-xl border border-black bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm">
+                                                <span className="block truncate text-lg">
+                                                    {kategori}
+                                                </span>
+                                                <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                                    <ChevronUpDownIcon
+                                                        className="h-5 w-5 text-gray-400"
+                                                        aria-hidden="true"
+                                                    />
+                                                </span>
+                                            </Listbox.Button>
+
+                                            <Transition
+                                                show={open}
+                                                as={Fragment}
+                                                leave="transition ease-in duration-100"
+                                                leaveFrom="opacity-100"
+                                                leaveTo="opacity-0"
+                                            >
+                                                <Listbox.Options className="absolute text-left z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                    {options.map(
+                                                        (option, index) => (
+                                                            <Listbox.Option
+                                                                key={index}
+                                                                className={({
+                                                                    active,
+                                                                }) =>
+                                                                    classNames(
+                                                                        active
+                                                                            ? "text-white bg-blue-600"
+                                                                            : "text-gray-900",
+                                                                        "relative cursor-default select-none py-2 pl-3 pr-9"
+                                                                    )
+                                                                }
+                                                                value={option}
+                                                            >
+                                                                {({
+                                                                    kategori,
+                                                                    active,
+                                                                }) => (
+                                                                    <>
+                                                                        <span
+                                                                            className={classNames(
+                                                                                kategori
+                                                                                    ? "font-semibold"
+                                                                                    : "font-normal",
+                                                                                "block truncate"
+                                                                            )}
+                                                                        >
+                                                                            {
+                                                                                option
+                                                                            }
+                                                                        </span>
+
+                                                                        {kategori ? (
+                                                                            <span
+                                                                                className={classNames(
+                                                                                    active
+                                                                                        ? "text-white"
+                                                                                        : "text-blue-600",
+                                                                                    "absolute inset-y-0 right-0 flex items-center pr-4"
+                                                                                )}
+                                                                            >
+                                                                                <CheckIcon
+                                                                                    className="h-5 w-5"
+                                                                                    aria-hidden="true"
+                                                                                />
+                                                                            </span>
+                                                                        ) : null}
+                                                                    </>
+                                                                )}
+                                                            </Listbox.Option>
+                                                        )
+                                                    )}
+                                                </Listbox.Options>
+                                            </Transition>
+                                        </div>
+                                    </>
+                                )}
+                            </Listbox>
                             <input
                                 className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-blue-500"
                                 type="number"
