@@ -31,7 +31,10 @@ Route::get('/', function () {
     return Inertia::render('Beranda');
 })->name('home');
 
-
+Route::post('/registers', [UserController::class, 'store']);
+Route::post('/logins', [UserController::class, 'login']);
+Route::get('/profils/{userid}', [UserController::class, 'profil']);
+Route::put('/profils/{userid}', [UserController::class, 'editprofil']);
 Route::get('/user', [UserController::class, 'show']);
 Route::get('/produk', [ProdukController::class, 'show'])->name('listproduk');
 Route::post('/addproduk', [ProdukController::class, 'addproduk']);
@@ -39,6 +42,13 @@ Route::put('/produk/{produk}/edit', [ProdukController::class, 'update']);
 Route::delete('/produk/{produk}/delete', [ProdukController::class, 'destroy'])->name('deleteproduk');
 Route::get('/produksend', [ProdukController::class, 'send']);
 Route::get('/produksend/{produkid}', [ProdukController::class, 'sendid']);
+
+// Route::group(['prefix' => 'api', 'middleware' => 'cors'], function () {
+//     // Rute-rute API di sini
+// });
+Route::middleware('cors')->group(function () {
+    // Rute-rute API di sini
+});
 
 Route::get('/home', function (){
     return Inertia::render('screens/Homescreen');
