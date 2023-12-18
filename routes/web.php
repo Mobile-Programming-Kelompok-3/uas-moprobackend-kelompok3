@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\UserController;
+use App\Models\Transactions;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,7 +39,11 @@ Route::get('/profils/{userid}', [UserController::class, 'profil']);
 Route::put('/profils/{userid}', [UserController::class, 'editprofil']);
 Route::get('/user', [UserController::class, 'show']);
 Route::get('/produk', [ProdukController::class, 'show'])->name('listproduk');
+Route::get('/transaksi', [TransactionsController::class, 'show'])->name('transaksi');
+Route::put('/transaksi/{idtransaksi}', [TransactionsController::class, 'update']);
+Route::delete('/transaksi/{idtransaksi}', [TransactionsController::class, 'delete']);
 Route::post('/addproduk', [ProdukController::class, 'addproduk']);
+Route::post('/transaksi/{userid}', [UserController::class, 'transaksi']);
 Route::put('/produk/{produk}/edit', [ProdukController::class, 'update']);
 Route::delete('/produk/{produk}/delete', [ProdukController::class, 'destroy'])->name('deleteproduk');
 Route::get('/produksend', [ProdukController::class, 'send']);

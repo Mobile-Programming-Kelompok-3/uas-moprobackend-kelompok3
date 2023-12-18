@@ -12,14 +12,13 @@ import {
   XMarkIcon,
   UserMinusIcon,
 } from '@heroicons/react/24/solid'
-import Logo from '../Asset/Beki.png'
+import Logo from '../Asset/Logo Dlillah.png'
 
 const navigation = [
-  { name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
+  { name: 'Dashboard', href: '/', icon: HomeIcon, current: false },
   { name: 'Kelola Produk', href: '/produk', icon: FolderIcon, current: false },
-  { name: 'Kelola Pesanan', href: '#', icon: InboxIcon, current: false },
-  { name: 'Kelola Chat Bot', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Kelola User', href: '/user', icon: UserMinusIcon, current: false },
+  { name: 'Kelola Pesanan', href: '/transaksi', icon: InboxIcon, current: false },
+  { name: 'Kelola User', href: '/user', icon: UserMinusIcon, current: true },
 
 ]
 

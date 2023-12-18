@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Transactions;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,9 +13,27 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function transaksi(Request $request, $userid)
     {
-        //
+        // Ambil data dari request
+        $data = $request->only([
+            'produk_id',
+            'total_pesanan',
+            'total_harga',
+            'catatan',
+            'bukti_pembayaran',
+            'tanggal_pemesanan',
+            'alamat_penerima',
+            'user_id',
+            'status',
+            // Atau atribut lain yang kamu perlukan
+        ]);
+
+        // Simpan data ke dalam database
+        $transaction = Transactions::create($data);
+
+        // Lakukan sesuatu setelah transaksi berhasil disimpan, misalnya memberikan respons
+        return response()->json(['message' => 'Transaksi berhasil disimpan', 'data' => $transaction], 201);
     }
 
     /**
