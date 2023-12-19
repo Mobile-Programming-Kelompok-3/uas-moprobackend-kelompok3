@@ -43,11 +43,11 @@ export default function KelolaProduk(props) {
                             <h1 className="text-left font-bold text-[48px] text-black mr-4">
                                 Kelola Produk
                             </h1>
-                            
+
                                 <button onClick={() =>
                                                     setAddProdukVisible(true)
                                                 }
-                                className="px-10 py-3 w-auto bg-blue-500 border border-transparent rounded-md font-semibold text-md text-white hover:bg-blue-800 focus:bg-blue-400 active:bg-blue-100 focus:outline-none transition ease-in-out duration-150">
+                                className="px-10 py-3 w-auto bg-green-500 border border-transparent rounded-md font-semibold text-md text-white hover:bg-green-800 focus:bg-blue-400 active:bg-blue-100 focus:outline-none transition ease-in-out duration-150">
                                     <h1 className="text-base font-bold">
                                         Tambah Produk
                                     </h1>
@@ -56,7 +56,7 @@ export default function KelolaProduk(props) {
 
                         <div className="relative overflow-x-auto mt-10">
                             <table className="w-full text-lg text-left ">
-                                <thead className="text-lg  bg-blue-500 text-white">
+                                <thead className="text-lg  bg-green-500 text-white">
                                     <tr className="border-b-2 font-bold ">
                                         <th scope="col" className="px-6 py-3">
                                             No
@@ -65,22 +65,22 @@ export default function KelolaProduk(props) {
                                             Nama
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            kategori
+                                            Kategori
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            harga
+                                            Harga
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            aksi
+                                            Aksi
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            gambar
+                                            Gambar
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {props.produk.map((item) => (
-                                        
+
                                             <tr key={item.id} className="bg-white border-b-2 text-lg">
                                                 <th
                                                     scope="row"
@@ -109,7 +109,7 @@ export default function KelolaProduk(props) {
                                                     <button onClick={() => {setProdukId(item.id);setEditProdukVisible(true);}} className="px-5">
                                                         Edit
                                                     </button>
-                                                    
+
                                                     <button onClick={() => {
                                                 removeProduk(item.id);
                                             }}>Hapus</button>
@@ -118,7 +118,7 @@ export default function KelolaProduk(props) {
                                                     <img src={item.gambar} className="w-24" />
                                                 </td>
                                             </tr>
-                                        
+
                                     ))}
                                 </tbody>
                             </table>

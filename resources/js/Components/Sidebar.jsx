@@ -17,7 +17,7 @@ import Logo from '../Asset/Logo Dlillah.png'
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon, current: false },
   { name: 'Kelola Produk', href: '/produk', icon: FolderIcon, current: false },
-  { name: 'Kelola Pesanan', href: '/transaksi', icon: InboxIcon, current: true },
+  { name: 'Kelola Pesanan', href: '/transaksi', icon: InboxIcon, current: false },
   { name: 'Kelola User', href: '/user', icon: UserMinusIcon, current: false },
 
 ]
@@ -28,7 +28,18 @@ function classNames(...classes) {
 
 export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [isClicked, setIsClicked] = useState(false);
 
+  const handleButtonClick = () => {
+    // Mengubah state isClicked menjadi true saat tombol diklik
+    setIsClicked(true);
+
+    // Tambahan logika lain jika diperlukan
+    // ...
+
+    // Menutup sidebar atau melakukan tindakan lain
+    // setSidebarOpen(false);
+  };
   return (
     <>
       {/*
@@ -79,6 +90,7 @@ export default function Sidebar() {
                         className="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                         onClick={() => setSidebarOpen(false)}
                       >
+
                         <span className="sr-only">Close sidebar</span>
                         <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
                       </button>
@@ -99,14 +111,14 @@ export default function Sidebar() {
                           href={item.name === 'Logout' ? route('logout') : item}
                           className={classNames(
                             item.current
-                              ? 'bg-blue-200 text-blue-700'
-                              : 'text-blue-700 hover:bg-blue-50 hover:text-blue-700',
+                              ? 'bg-green-200 text-green-700'
+                              : 'text-green-700 hover:bg-green-50 hover:text-green-700',
                             'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                           )}
                         >
                           <item.icon
                             className={classNames(
-                              item.current ? 'text-blue-700' : 'text-blue-700 group-hover:text-blue-700',
+                              item.current ? 'text-green-700' : 'text-green-700 group-hover:text-green-700',
                               'mr-4 flex-shrink-0 h-6 w-6'
                             )}
                             aria-hidden="true"
@@ -126,7 +138,7 @@ export default function Sidebar() {
         {/* Static sidebar for desktop */}
         <div className="hidden md:fixed md:inset-y-0 md:flex md:w-80 md:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-blue-400">
+          <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-green-500">
             <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
               <div className="flex justify-center flex-shrink-0 items-center px-4">
                 <img
@@ -135,13 +147,13 @@ export default function Sidebar() {
                   alt="Your Company"
                 />
               </div>
-              <nav className="mt-5 flex-1 space-y-1 bg-blue-400 ">
+              <nav className="mt-5 flex-1 space-y-1 bg-green-500 ">
                 {navigation.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      item.current ? 'bg-gray-800 text-white' : 'text-white hover:bg-blue-200 hover:text-white',
+                      item.current ? 'bg-gray-800 text-white' : 'text-white hover:bg-green-200 hover:text-white',
                       'group flex items-center px-2 py-2 text-base font-medium '
                     )}
                   >

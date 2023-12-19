@@ -15,7 +15,7 @@ export default function KelolaUser(props) {
                             </h1>
                         <div className="relative overflow-x-auto mt-10">
                             <table class="w-full text-lg text-left ">
-                                <thead class="text-lg  bg-blue-500 text-white">
+                                <thead class="text-lg  bg-green-500 text-white">
                                     <tr class="border-b-2 font-bold ">
                                         <th scope="col" class="px-6 py-3">
                                             No
@@ -33,7 +33,7 @@ export default function KelolaUser(props) {
                                             Alamat
                                         </th>
                                         <th scope="col" class="px-6 py-3">
-                                            jumlah
+                                            Jumlah
                                         </th>
                                     </tr>
                                 </thead>
