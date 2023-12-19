@@ -17,8 +17,8 @@ import Logo from '../Asset/Logo Dlillah.png'
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon, current: false },
   { name: 'Kelola Produk', href: '/produk', icon: FolderIcon, current: false },
-  { name: 'Kelola Pesanan', href: '/transaksi', icon: InboxIcon, current: false },
-  { name: 'Kelola User', href: '/user', icon: UserMinusIcon, current: true },
+  { name: 'Kelola Pesanan', href: '/transaksi', icon: InboxIcon, current: true },
+  { name: 'Kelola User', href: '/user', icon: UserMinusIcon, current: false },
 
 ]
 

@@ -19,6 +19,19 @@ class TransactionsController extends Controller
         ]);
     }
 
+    public function belum($userId)
+{
+    // Mengambil semua transaksi dengan userId yang sesuai
+    $produk = Produk::all();
+    $transactions = Transactions::where('user_id', $userId)
+                                ->where('status', 0)
+                                ->get();
+
+    return response()->json([
+        'produk' => $produk,
+        'transactions' => $transactions,
+    ]);
+}
     public function update(Request $request, $id)
 {
     // Validate the incoming request data

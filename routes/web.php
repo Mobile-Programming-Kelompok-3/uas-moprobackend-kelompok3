@@ -42,6 +42,7 @@ Route::get('/produk', [ProdukController::class, 'show'])->name('listproduk');
 Route::get('/transaksi', [TransactionsController::class, 'show'])->name('transaksi');
 Route::put('/transaksi/{idtransaksi}', [TransactionsController::class, 'update']);
 Route::delete('/transaksi/{idtransaksi}', [TransactionsController::class, 'delete']);
+Route::get('/transaksibelum/{idtransaksi}', [TransactionsController::class, 'belum']);
 Route::post('/addproduk', [ProdukController::class, 'addproduk']);
 Route::post('/transaksi/{userid}', [UserController::class, 'transaksi']);
 Route::put('/produk/{produk}/edit', [ProdukController::class, 'update']);

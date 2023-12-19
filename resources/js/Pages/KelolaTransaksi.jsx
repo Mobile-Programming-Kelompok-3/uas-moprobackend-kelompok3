@@ -7,13 +7,20 @@ export default function KelolaTransaksi(props) {
     const [transactions, setTransactions] = useState([]);
     const [produk, setProduk] = useState([]);
 
-    useEffect(() => {
-        console.log("Props received:", props);
-        if (Array.isArray(props.transactions) && props.transactions.length > 0) {
-            setTransactions(props.transactions);
-        }
-        setProduk(props.produk);
-    }, [props.transactions], [props.produk]);
+    useEffect(
+        () => {
+            console.log("Props received:", props);
+            if (
+                Array.isArray(props.transactions) &&
+                props.transactions.length > 0
+            ) {
+                setTransactions(props.transactions);
+            }
+            setProduk(props.produk);
+        },
+        [props.transactions],
+        [props.produk]
+    );
 
     const getProductDetails = (produkId) => {
         return produk.find((product) => product.id === produkId);
@@ -24,7 +31,7 @@ export default function KelolaTransaksi(props) {
             if (transaction.id === transactionId) {
                 console.log(transaction.status);
                 const data = {
-                    status:1,
+                    status: 1,
                 };
                 Inertia.put(`/transaksi/${transactionId}`, data);
                 window.location.reload();
@@ -36,7 +43,7 @@ export default function KelolaTransaksi(props) {
 
     const handleReject = (transactionId) => {
         const updatedTransactions = transactions.map((transaction) => {
-            if (transaction.id === transactionId) {          
+            if (transaction.id === transactionId) {
                 Inertia.delete(`/transaksi/${transactionId}`);
                 window.location.reload();
             }
@@ -49,16 +56,11 @@ export default function KelolaTransaksi(props) {
         <div className="flex h-screen">
             <Sidebar />
             <main className="flex-1 overflow-y-auto bg-gray-200">
-                <div className="py-6">
-                    <div className="mx-auto max-w-7xl px-8 sm:px-6 md:pl-24">
-                        <h1 className="text-4xl font-extrabold text-gray-900">
-                            Selamat Datang,{" "}
-                            <span className="text-blue-500">{"au"}!</span>
-                        </h1>
-                        <h1 className="my-5 pr-52 text-xl font-normal text-gray-900">
-                            Pada halaman ini kamu bisa membuat dan mengatur dan
-                            mengelola tes.
-                        </h1>
+                <div className="py-6 ">
+                    <h1 className="mx-auto my-5 max-w-7xl gap-1 flex flex-wrap text-4xl font-extrabold text-gray-900">
+                        Kelola Pesanan
+                    </h1>
+                    <div className="mx-auto max-w-7xl gap-1 flex flex-wrap justify-between">
                         {transactions.map((transaction) => {
                             if (transaction.status === 1) {
                                 return null; // Tidak menampilkan transaksi dengan status 1
@@ -69,14 +71,14 @@ export default function KelolaTransaksi(props) {
                             return (
                                 <div
                                     key={transaction.id}
-                                    className="bg-white rounded-lg shadow-md p-4 w-full md:w-1/3"
+                                    className="bg-white rounded-lg shadow-md p-4 my-2 w-1/4"
                                 >
                                     <img
                                         src={product.gambar}
                                         alt="gambar"
                                         className="w-full"
                                     />
-                                    <h2 className="text-lg font-semibold text-gray-800 mb-2">
+                                    <h2 className="text-3xl font-semibold text-gray-800 mb-2">
                                         {product
                                             ? product.name
                                             : "Product Not Found"}
@@ -84,8 +86,8 @@ export default function KelolaTransaksi(props) {
                                     <p className="text-3xl font-bold text-blue-500">
                                         {transaction.total_harga}
                                     </p>
-                                    <p className="text-3xl font-bold text-blue-500">
-                                        {transaction.catatan}
+                                    <p className="text-xl font-bold text-gray-800">
+                                        catatan: {transaction.catatan}
                                     </p>
                                     <Link
                                         href={transaction.bukti_pembayaran} // Replace with your desired URL
@@ -96,17 +98,14 @@ export default function KelolaTransaksi(props) {
                                         Lihat Bukti Transaksi
                                     </Link>
                                     <div className="justify-center gap-5  flex">
-                                       
-                                            <button
-                                                className="bg-green-600 text-white p-2 font-bold rounded-md"
-                                                onClick={() =>
-                                                    handleAccept(
-                                                        transaction.id
-                                                    )
-                                                }
-                                            >
-                                                Accept
-                                            </button>
+                                        <button
+                                            className="bg-green-600 text-white p-2 font-bold rounded-md"
+                                            onClick={() =>
+                                                handleAccept(transaction.id)
+                                            }
+                                        >
+                                            Accept
+                                        </button>
                                         <button
                                             className="bg-red-700 text-white p-2 font-bold rounded-md"
                                             onClick={() =>
