@@ -19,6 +19,11 @@ class TransactionsController extends Controller
         ]);
     }
 
+    public function hasil($userId)
+    {
+        
+    }
+
     public function belum($userId)
 {
     // Mengambil semua transaksi dengan userId yang sesuai
@@ -32,12 +37,28 @@ class TransactionsController extends Controller
         'transactions' => $transactions,
     ]);
 }
+
+public function sudah($userId)
+{
+    // Mengambil semua transaksi dengan userId yang sesuai
+    $produk = Produk::all();
+    $transactions = Transactions::where('user_id', $userId)
+                                ->where('status', 1)
+                                ->get();
+
+    return response()->json([
+        'produk' => $produk,
+        'transactions' => $transactions,
+    ]);
+}
+
     public function update(Request $request, $id)
 {
     // Validate the incoming request data
     $validatedData = $request->validate([
         // Define your validation rules here
-        'status' => 'required|integer' // For example, assuming 'status' is being updated
+        'status' => 'required|integer', // For example, assuming 'status' is being updated
+        'statusproses' =>'required|integer'
     ]);
 
     // Find the transaction by ID

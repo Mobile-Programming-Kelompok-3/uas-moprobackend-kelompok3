@@ -32,6 +32,7 @@ export default function KelolaTransaksi(props) {
                 console.log(transaction.status);
                 const data = {
                     status: 1,
+                    statusproses:0,
                 };
                 Inertia.put(`/transaksi/${transactionId}`, data);
                 window.location.reload();
@@ -84,7 +85,7 @@ export default function KelolaTransaksi(props) {
                                             : "Product Not Found"}
                                     </h2>
                                     <p className="text-3xl font-bold text-blue-500">
-                                        {transaction.total_harga}
+                                        Rp. {transaction.total_harga}
                                     </p>
                                     <p className="text-xl font-bold text-gray-800">
                                         catatan: {transaction.catatan}
