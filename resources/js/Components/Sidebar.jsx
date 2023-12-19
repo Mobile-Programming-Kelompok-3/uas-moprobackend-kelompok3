@@ -147,7 +147,7 @@ export default function Sidebar() {
                   alt="Your Company"
                 />
               </div>
-              <nav className="mt-5 flex-1 space-y-1 bg-green-500 ">
+              <nav className="mt-5 px-3 flex-1 space-y-1 bg-green-500 ">
                 {navigation.map((item) => (
                   <a
                     key={item.name}

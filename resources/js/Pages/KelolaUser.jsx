@@ -5,7 +5,7 @@ import Sidebar from "@/Components/Sidebar";
 export default function KelolaUser(props) {
     return (
         <>
-            <Head title="Kelola Produk" />
+            <Head title="Kelola User" />
             <div className="flex flex-col md:flex-row">
                 <Sidebar />
                 <div className="w-full md:w-2/3 mx-auto lg:p-10 md:p-6 pl-0 flex flex-col justify-between h-auto">

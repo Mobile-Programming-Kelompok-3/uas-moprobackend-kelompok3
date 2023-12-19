@@ -4,6 +4,8 @@ import Sidebar from "@/Components/Sidebar";
 
 export default function Dashboard(props) {
     return (
+        <>
+        <Head title="Dashboard" />
         <div className="flex h-screen">
             <Sidebar />
             <main className="flex-1 overflow-y-auto bg-gray-200">
@@ -63,5 +65,6 @@ export default function Dashboard(props) {
                 </div>
             </main>
         </div>
+        </>
     );
 }

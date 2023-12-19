@@ -6,7 +6,7 @@ import { Inertia } from "@inertiajs/inertia";
 
 export default function AddProduk({ props, visible, onClose, options }) {
     const [name, setName] = useState("");
-    const [harga, setHarga] = useState(0);
+    const [harga, setHarga] = useState("");
     const [kategori, setKategori] = useState(options[0]);
     const [deskripsi, setDeskripsi] = useState("");
     const [gambar, setGambar] = useState(null); // Gunakan null untuk menyimpan file
@@ -97,8 +97,9 @@ export default function AddProduk({ props, visible, onClose, options }) {
                             <Listbox value={kategori} onChange={setKategori}>
                                 {({ open }) => (
                                     <>
-                                        <div className="relative mt-1">
-                                            <Listbox.Button className="relative w-full cursor-default rounded-xl border border-black bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 sm:text-sm">
+                                        <div className="relative mt-1 mb-5 ">
+                                            <Listbox.Button className="relative w-full cursor-default rounded-md border border-black bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 sm:text-sm">
+                                                Pilih kategori
                                                 <span className="block truncate text-lg">
                                                     {kategori}
                                                 </span>
@@ -117,7 +118,7 @@ export default function AddProduk({ props, visible, onClose, options }) {
                                                 leaveFrom="opacity-100"
                                                 leaveTo="opacity-0"
                                             >
-                                                <Listbox.Options className="absolute text-left z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                <Listbox.Options className="absolute text-left z-10 mt-1 max-h-60 w-full overflow-auto rounded-none bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                                     {options.map(
                                                         (option, index) => (
                                                             <Listbox.Option
@@ -194,6 +195,7 @@ export default function AddProduk({ props, visible, onClose, options }) {
                                 onChange={(e) => setDeskripsi(e.target.value)}
                             ></textarea>
                             <input
+                                className="pb-3"
                                 type="file"
                                 onChange={handleFileChange}
                             />

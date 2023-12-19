@@ -54,6 +54,8 @@ export default function KelolaTransaksi(props) {
     };
 
     return (
+        <>
+        <Head title="Kelola Pesanan" />
         <div className="flex h-screen">
             <Sidebar />
             <main className="flex-1 overflow-y-auto bg-gray-200">
@@ -123,5 +125,6 @@ export default function KelolaTransaksi(props) {
                 </div>
             </main>
         </div>
+        </>
     );
 }
