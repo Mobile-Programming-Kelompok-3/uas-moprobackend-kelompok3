@@ -55,7 +55,10 @@ Route::delete('/produk/{produk}/delete', [ProdukController::class, 'destroy'])->
 Route::get('/produksend', [ProdukController::class, 'send']);
 Route::get('/produksend/{produkid}', [ProdukController::class, 'sendid']);
 Route::get('/bukti_pembayaran/{transactionsid}', [TransactionsController::class, 'sendid']);
-Route::post('/keranjang/{produkid}', [KeranjangController::class, 'sendproduk']);
+Route::post('/keranjang', [KeranjangController::class, 'sendproduk']);
+Route::get('/keranjang/{userid}', [KeranjangController::class, 'ambil']);
+Route::delete('/keranjang/{itemid}', [KeranjangController::class, 'buang']);
+Route::delete('/keranjangs/{userid}', [KeranjangController::class, 'delete']);
 
 // Route::group(['prefix' => 'api', 'middleware' => 'cors'], function () {
 //     // Rute-rute API di sini

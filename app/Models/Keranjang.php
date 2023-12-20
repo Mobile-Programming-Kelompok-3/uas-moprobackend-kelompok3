@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Keranjang extends Model
 {
     protected $fillable = [
-        'produk_id', 'user_id'
+        'produk_id', 'user_id', 'jumlah'
         // Tambahkan kolom lain yang perlu diisi secara massal
     ];
     use HasFactory;
