@@ -93,13 +93,13 @@ export default function KelolaTransaksi(props) {
                                         catatan: {transaction.catatan}
                                     </p>
                                     <Link
-                                        href={transaction.bukti_pembayaran} // Replace with your desired URL
-                                        className="text-blue-500 hover:underline justify-end flex"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        Lihat Bukti Transaksi
-                                    </Link>
+    href={`/bukti_pembayaran/${transaction.id}`} // Ganti dengan URL yang sesuai untuk menampilkan bukti pembayaran
+    className="text-blue-500 hover:underline justify-end flex"
+    target="_blank"
+    rel="noopener noreferrer"
+>
+    Lihat Bukti Transaksi
+</Link>
                                     <div className="justify-center gap-5  flex">
                                         <button
                                             className="bg-green-600 text-white p-2 font-bold rounded-md"

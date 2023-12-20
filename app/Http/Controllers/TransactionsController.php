@@ -19,6 +19,15 @@ class TransactionsController extends Controller
         ]);
     }
 
+    public function sendid(Transactions $transactions, $transactionsid)
+    {
+
+        $transactions = Transactions::findOrFail($transactionsid);
+        return inertia::render('BuktiPembayaran', [
+            'transactions' => $transactions,
+        ]);
+    }
+
     public function hasil($userId)
     {
         

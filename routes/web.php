@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionsController;
@@ -53,6 +54,8 @@ Route::put('/produk/{produk}/edit', [ProdukController::class, 'update']);
 Route::delete('/produk/{produk}/delete', [ProdukController::class, 'destroy'])->name('deleteproduk');
 Route::get('/produksend', [ProdukController::class, 'send']);
 Route::get('/produksend/{produkid}', [ProdukController::class, 'sendid']);
+Route::get('/bukti_pembayaran/{transactionsid}', [TransactionsController::class, 'sendid']);
+Route::post('/keranjang/{produkid}', [KeranjangController::class, 'sendproduk']);
 
 // Route::group(['prefix' => 'api', 'middleware' => 'cors'], function () {
 //     // Rute-rute API di sini
