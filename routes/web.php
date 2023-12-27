@@ -34,6 +34,7 @@ Route::get('/', function () {
     return Inertia::render('Beranda');
 })->name('home');
 
+Route::get('/', [UserController::class, 'index']);
 Route::post('/registers', [UserController::class, 'store']);
 Route::post('/logins', [UserController::class, 'login']);
 Route::get('/profils/{userid}', [UserController::class, 'profil']);

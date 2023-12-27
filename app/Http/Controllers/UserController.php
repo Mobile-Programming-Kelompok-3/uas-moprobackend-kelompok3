@@ -37,6 +37,17 @@ class UserController extends Controller
         return response()->json(['message' => 'Transaksi berhasil disimpan', 'data' => $transaction], 201);
     }
 
+    public function index()
+    {
+        $user = User::all();
+        $produk = Produk::all();
+        $transaction = Transactions::all();
+        return inertia::render('Beranda', [
+            'user' => $user,
+            'produk' => $produk,
+            'transaction' => $transaction,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
