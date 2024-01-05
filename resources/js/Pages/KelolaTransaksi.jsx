@@ -83,7 +83,7 @@ export default function KelolaTransaksi(props) {
                                             ? product.name
                                             : "Product Not Found"}
                                     </h2>
-                                    <p className="text-3xl font-bold text-blue-500">
+                                    <p className="text-3xl font-bold text-pink-500">
                                         {transaction.total_harga}
                                     </p>
                                     <p className="text-xl font-bold text-gray-800">
@@ -91,7 +91,7 @@ export default function KelolaTransaksi(props) {
                                     </p>
                                     <Link
                                         href={transaction.bukti_pembayaran} // Replace with your desired URL
-                                        className="text-blue-500 hover:underline justify-end flex"
+                                        className="text-pink-500 hover:underline justify-end flex"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

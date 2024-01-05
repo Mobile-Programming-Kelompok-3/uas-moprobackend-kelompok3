@@ -9,7 +9,7 @@ export default function KelolaProduk(props) {
     const [isAddProdukVisible, setAddProdukVisible] = useState(false);
     const [isEditProdukVisible, setEditProdukVisible] = useState(false);
     const kategoriNames = {
-        1: "Makanan",
+        1: "Jeans",
         2: "Minuman",
         3: "Kebutuhan Dapur",
         4: "Kebutuhan Kesehatan",
@@ -47,7 +47,7 @@ export default function KelolaProduk(props) {
                                 <button onClick={() =>
                                                     setAddProdukVisible(true)
                                                 }
-                                className="px-10 py-3 w-auto bg-blue-500 border border-transparent rounded-md font-semibold text-md text-white hover:bg-blue-800 focus:bg-blue-400 active:bg-blue-100 focus:outline-none transition ease-in-out duration-150">
+                                className="px-10 py-3 w-auto bg-pink-500 border border-transparent rounded-md font-semibold text-md text-white hover:bg-pink-800 focus:bg-pink-400 active:bg-pink-100 focus:outline-none transition ease-in-out duration-150">
                                     <h1 className="text-base font-bold">
                                         Tambah Produk
                                     </h1>
@@ -56,7 +56,7 @@ export default function KelolaProduk(props) {
 
                         <div className="relative overflow-x-auto mt-10">
                             <table className="w-full text-lg text-left ">
-                                <thead className="text-lg  bg-blue-500 text-white">
+                                <thead className="text-lg  bg-pink-500 text-white">
                                     <tr className="border-b-2 font-bold ">
                                         <th scope="col" className="px-6 py-3">
                                             No
