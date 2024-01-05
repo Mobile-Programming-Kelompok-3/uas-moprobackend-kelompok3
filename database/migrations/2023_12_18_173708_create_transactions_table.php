@@ -20,7 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('total_pesanan');
             $table->decimal('total_harga', 10, 2);
             $table->text('catatan')->nullable();
-            $table->string('bukti_pembayaran')->nullable();
+            $table->longText('bukti_pembayaran')->nullable();
             $table->timestamp('tanggal_pemesanan')->nullable();
             $table->string('alamat_penerima');
             $table->unsignedBigInteger('user_id');

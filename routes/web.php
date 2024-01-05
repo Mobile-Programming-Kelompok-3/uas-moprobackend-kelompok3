@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionsController;
@@ -33,6 +34,7 @@ Route::get('/', function () {
     return Inertia::render('Beranda');
 })->name('home');
 
+Route::get('/', [UserController::class, 'index']);
 Route::post('/registers', [UserController::class, 'store']);
 Route::post('/logins', [UserController::class, 'login']);
 Route::get('/profils/{userid}', [UserController::class, 'profil']);
@@ -40,15 +42,24 @@ Route::put('/profils/{userid}', [UserController::class, 'editprofil']);
 Route::get('/user', [UserController::class, 'show']);
 Route::get('/produk', [ProdukController::class, 'show'])->name('listproduk');
 Route::get('/transaksi', [TransactionsController::class, 'show'])->name('transaksi');
+Route::get('/transaksi/{userid}', [TransactionsController::class, 'hasil']);
 Route::put('/transaksi/{idtransaksi}', [TransactionsController::class, 'update']);
 Route::delete('/transaksi/{idtransaksi}', [TransactionsController::class, 'delete']);
-Route::get('/transaksibelum/{idtransaksi}', [TransactionsController::class, 'belum']);
+Route::get('/pembayaranbelum/{idtransaksi}', [TransactionsController::class, 'belum']);
+Route::get('/pembayaransudah/{idtransaksi}', [TransactionsController::class, 'sudah']);
+Route::get('/prosesbelum/{idtransaksi}', [TransactionsController::class, 'belumproses']);
+Route::get('/prosessudah/{idtransaksi}', [TransactionsController::class, 'sudahproses']);
 Route::post('/addproduk', [ProdukController::class, 'addproduk']);
 Route::post('/transaksi/{userid}', [UserController::class, 'transaksi']);
 Route::put('/produk/{produk}/edit', [ProdukController::class, 'update']);
 Route::delete('/produk/{produk}/delete', [ProdukController::class, 'destroy'])->name('deleteproduk');
 Route::get('/produksend', [ProdukController::class, 'send']);
 Route::get('/produksend/{produkid}', [ProdukController::class, 'sendid']);
+Route::get('/bukti_pembayaran/{transactionsid}', [TransactionsController::class, 'sendid']);
+Route::post('/keranjang', [KeranjangController::class, 'sendproduk']);
+Route::get('/keranjang/{userid}', [KeranjangController::class, 'ambil']);
+Route::delete('/keranjang/{itemid}', [KeranjangController::class, 'buang']);
+Route::delete('/keranjangs/{userid}', [KeranjangController::class, 'delete']);
 
 // Route::group(['prefix' => 'api', 'middleware' => 'cors'], function () {
 //     // Rute-rute API di sini

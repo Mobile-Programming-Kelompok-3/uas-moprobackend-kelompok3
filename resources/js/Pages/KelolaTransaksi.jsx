@@ -32,6 +32,7 @@ export default function KelolaTransaksi(props) {
                 console.log(transaction.status);
                 const data = {
                     status: 1,
+                    statusproses:0,
                 };
                 Inertia.put(`/transaksi/${transactionId}`, data);
                 window.location.reload();
@@ -53,11 +54,19 @@ export default function KelolaTransaksi(props) {
     };
 
     return (
-        <div className="flex h-screen">
+        <>
+        <Head title="Kelola Pesanan" />
+        <div className="flex flex-col md:flex-row">
             <Sidebar />
+<<<<<<< HEAD
             <main className="flex-1 overflow-y-auto bg-gray-200">
                 <div className="py-6 pl-20">
                     <h1 className="mx-auto my-5 max-w-7xl gap-1 flex flex-wrap text-4xl font-extrabold text-gray-900">
+=======
+            <main className="w-full md:w-2/3 mx-auto lg:p-10 md:p-6 pl-0 flex flex-col justify-between h-auto">
+                <div className="container">
+                    <h1 className="text-left font-bold text-[48px] text-black mr-4">
+>>>>>>> ec7c9b9e16633081862d3518bb78d0277bd3cf48
                         Kelola Pesanan
                     </h1>
                     <div className="mx-auto max-w-7xl gap-1 flex flex-wrap justify-between">
@@ -83,13 +92,19 @@ export default function KelolaTransaksi(props) {
                                             ? product.name
                                             : "Product Not Found"}
                                     </h2>
+<<<<<<< HEAD
                                     <p className="text-3xl font-bold text-pink-500">
                                         {transaction.total_harga}
+=======
+                                    <p className="text-3xl font-bold text-blue-500">
+                                        Rp. {transaction.total_harga}
+>>>>>>> ec7c9b9e16633081862d3518bb78d0277bd3cf48
                                     </p>
                                     <p className="text-xl font-bold text-gray-800">
                                         catatan: {transaction.catatan}
                                     </p>
                                     <Link
+<<<<<<< HEAD
                                         href={transaction.bukti_pembayaran} // Replace with your desired URL
                                         className="text-pink-500 hover:underline justify-end flex"
                                         target="_blank"
@@ -97,6 +112,15 @@ export default function KelolaTransaksi(props) {
                                     >
                                         Lihat Bukti Transaksi
                                     </Link>
+=======
+    href={`/bukti_pembayaran/${transaction.id}`} // Ganti dengan URL yang sesuai untuk menampilkan bukti pembayaran
+    className="text-blue-500 hover:underline justify-end flex"
+    target="_blank"
+    rel="noopener noreferrer"
+>
+    Lihat Bukti Transaksi
+</Link>
+>>>>>>> ec7c9b9e16633081862d3518bb78d0277bd3cf48
                                     <div className="justify-center gap-5  flex">
                                         <button
                                             className="bg-green-600 text-white p-2 font-bold rounded-md"
@@ -122,5 +146,6 @@ export default function KelolaTransaksi(props) {
                 </div>
             </main>
         </div>
+        </>
     );
 }
