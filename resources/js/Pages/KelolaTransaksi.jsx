@@ -56,7 +56,7 @@ export default function KelolaTransaksi(props) {
         <div className="flex h-screen">
             <Sidebar />
             <main className="flex-1 overflow-y-auto bg-gray-200">
-                <div className="py-6 ">
+                <div className="py-6 pl-20">
                     <h1 className="mx-auto my-5 max-w-7xl gap-1 flex flex-wrap text-4xl font-extrabold text-gray-900">
                         Kelola Pesanan
                     </h1>
