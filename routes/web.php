@@ -39,7 +39,8 @@ Route::post('/registers', [UserController::class, 'store']);
 Route::post('/logins', [UserController::class, 'login']);
 Route::get('/profils/{userid}', [UserController::class, 'profil']);
 Route::put('/profils/{userid}', [UserController::class, 'editprofil']);
-Route::get('/user', [UserController::class, 'show']);
+Route::get('/user', [UserController::class, 'show'])->name('listuser');
+Route::delete('/user/{userid}/delete', [UserController::class, 'destroyuser'])->name('deleteuser');
 Route::get('/produk', [ProdukController::class, 'show'])->name('listproduk');
 Route::get('/transaksi', [TransactionsController::class, 'show'])->name('transaksi');
 Route::get('/transaksi/{userid}', [TransactionsController::class, 'hasil']);
@@ -68,7 +69,7 @@ Route::middleware('cors')->group(function () {
     // Rute-rute API di sini
 });
 
-Route::get('/home', function (){
+Route::get('/home', function () {
     return Inertia::render('screens/Homescreen');
 });
 
@@ -78,4 +79,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

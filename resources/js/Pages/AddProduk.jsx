@@ -6,7 +6,7 @@ import { Inertia } from "@inertiajs/inertia";
 
 export default function AddProduk({ props, visible, onClose, options }) {
     const [name, setName] = useState("");
-    const [harga, setHarga] = useState("");
+    const [harga, setHarga] = useState(0);
     const [kategori, setKategori] = useState(options[0]);
     const [deskripsi, setDeskripsi] = useState("");
     const [gambar, setGambar] = useState(null); // Gunakan null untuk menyimpan file
@@ -88,11 +88,7 @@ export default function AddProduk({ props, visible, onClose, options }) {
                         </div>
                         <form onSubmit={handleSubmit} >
                             <input
-<<<<<<< HEAD
                                 className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-pink-500"
-=======
-                                className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-green-500"
->>>>>>> ec7c9b9e16633081862d3518bb78d0277bd3cf48
                                 type="text"
                                 placeholder="Nama Produk"
                                 value={name}
@@ -101,14 +97,8 @@ export default function AddProduk({ props, visible, onClose, options }) {
                             <Listbox value={kategori} onChange={setKategori}>
                                 {({ open }) => (
                                     <>
-<<<<<<< HEAD
                                         <div className="relative mt-1">
                                             <Listbox.Button className="relative w-full cursor-default rounded-xl border border-black bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-pink-500 focus:outline-none focus:ring-1 focus:ring-pink-500 sm:text-sm">
-=======
-                                        <div className="relative mt-1 mb-5 ">
-                                            <Listbox.Button className="relative w-full cursor-default rounded-md border border-black bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 sm:text-sm">
-                                                Pilih kategori
->>>>>>> ec7c9b9e16633081862d3518bb78d0277bd3cf48
                                                 <span className="block truncate text-lg">
                                                     {kategori}
                                                 </span>
@@ -127,7 +117,7 @@ export default function AddProduk({ props, visible, onClose, options }) {
                                                 leaveFrom="opacity-100"
                                                 leaveTo="opacity-0"
                                             >
-                                                <Listbox.Options className="absolute text-left z-10 mt-1 max-h-60 w-full overflow-auto rounded-none bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                <Listbox.Options className="absolute text-left z-10 mt-1 mb-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                                     {options.map(
                                                         (option, index) => (
                                                             <Listbox.Option
@@ -137,11 +127,7 @@ export default function AddProduk({ props, visible, onClose, options }) {
                                                                 }) =>
                                                                     classNames(
                                                                         active
-<<<<<<< HEAD
                                                                             ? "text-white bg-pink-600"
-=======
-                                                                            ? "text-white bg-green-600"
->>>>>>> ec7c9b9e16633081862d3518bb78d0277bd3cf48
                                                                             : "text-gray-900",
                                                                         "relative cursor-default select-none py-2 pl-3 pr-9"
                                                                     )
@@ -171,11 +157,7 @@ export default function AddProduk({ props, visible, onClose, options }) {
                                                                                 className={classNames(
                                                                                     active
                                                                                         ? "text-white"
-<<<<<<< HEAD
                                                                                         : "text-pink-600",
-=======
-                                                                                        : "text-green-600",
->>>>>>> ec7c9b9e16633081862d3518bb78d0277bd3cf48
                                                                                     "absolute inset-y-0 right-0 flex items-center pr-4"
                                                                                 )}
                                                                             >
@@ -197,11 +179,7 @@ export default function AddProduk({ props, visible, onClose, options }) {
                                 )}
                             </Listbox>
                             <input
-<<<<<<< HEAD
-                                className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-pink-500"
-=======
-                                className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-green-500"
->>>>>>> ec7c9b9e16633081862d3518bb78d0277bd3cf48
+                                className="w-full px-4 py-2 mb-4 mt-4 border rounded-md focus:outline-none focus:border-pink-500"
                                 type="number"
                                 placeholder="Harga"
                                 value={harga}
@@ -210,28 +188,20 @@ export default function AddProduk({ props, visible, onClose, options }) {
                                 }
                             />
                             <textarea
-<<<<<<< HEAD
                                 className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-pink-500"
-=======
-                                className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-green-500"
->>>>>>> ec7c9b9e16633081862d3518bb78d0277bd3cf48
                                 placeholder="Deskripsi"
                                 value={deskripsi}
                                 onChange={(e) => setDeskripsi(e.target.value)}
                             ></textarea>
                             <input
-                                className="pb-3"
+                                className="mb-4"
                                 type="file"
                                 onChange={handleFileChange}
                             />
                             <button
 
                                 type="submit"
-<<<<<<< HEAD
                                 className="w-full px-4 py-2 bg-pink-500 text-white font-semibold rounded-md hover:bg-pink-800 focus:bg-pink-400 focus:outline-none transition duration-150 ease-in-out"
-=======
-                                className="w-full px-4 py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-800 focus:bg-green-400 focus:outline-none transition duration-150 ease-in-out"
->>>>>>> ec7c9b9e16633081862d3518bb78d0277bd3cf48
                             >
                                 Tambah Produk
                             </button>

@@ -31,7 +31,6 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        
     }
 
     /**
@@ -49,37 +48,36 @@ class ProdukController extends Controller
 
 
     public function addproduk(Request $request)
-{
-    try {
-        
-        $request->validate([
-            'name' => 'required',
-            'kategori' => 'required',
-            'harga' => 'required',
-            'deskripsi' => 'required',
-            'gambar' => 'required',
-        ]);
-        
-        $produkKategori = ProdukKategori::where('nama', $request->kategori)->first();
-        
+    {
+        try {
 
-        if (!$produkKategori) {
-            throw new \Exception('Kategori tidak ditemukan');
+            $request->validate([
+                'name' => 'required',
+                'kategori' => 'required',
+                'harga' => 'required',
+                'deskripsi' => 'required',
+                'gambar' => 'required',
+            ]);
+
+            $produkKategori = ProdukKategori::where('nama', $request->kategori)->first();
+
+
+            if (!$produkKategori) {
+                throw new \Exception('Kategori tidak ditemukan');
+            }
+
+            Produk::create([
+                'name' => $request->input('name'),
+                'harga' => $request->input('harga'),
+                'deskripsi' => $request->input('deskripsi'),
+                'gambar' => $request->input('gambar'),
+                'produk_kategoris_id' => $produkKategori->id,
+            ]);
+
+            return redirect()->back()->with('success', 'Produk berhasil ditambahkan');
+        } catch (\Exception $e) {
         }
-
-        Produk::create([
-            'name' => $request->input('name'),
-            'harga' => $request->input('harga'),
-            'deskripsi' => $request->input('deskripsi'),
-            'gambar' => $request->input('gambar'),
-            'produk_kategoris_id' => $produkKategori->id,
-        ]);
-        
-        return redirect()->back()->with('success', 'Produk berhasil ditambahkan');
-    } catch (\Exception $e) {
-        
     }
-}
 
 
     public function send(Produk $produk)
@@ -90,7 +88,7 @@ class ProdukController extends Controller
 
     public function sendid($id)
     {
-        
+
         $produk = Produk::find($id);
 
         if (!$produk) {
@@ -112,37 +110,37 @@ class ProdukController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $produkid)
-{
-    try {
-        $produk = Produk::findOrFail($produkid);
+    {
+        try {
+            $produk = Produk::findOrFail($produkid);
 
-        $request->validate([
-            'name' => 'required',
-            'kategori' => 'required',
-            'harga' => 'required',
-            'deskripsi' => 'required',
-            'gambar' => 'required',
-        ]);
+            $request->validate([
+                'name' => 'required',
+                'kategori' => 'required',
+                'harga' => 'required',
+                'deskripsi' => 'required',
+                'gambar' => 'required',
+            ]);
 
-        $produkKategori = ProdukKategori::where('nama', $request->kategori)->first();
+            $produkKategori = ProdukKategori::where('nama', $request->kategori)->first();
 
-        if (!$produkKategori) {
-            throw new \Exception('Kategori tidak ditemukan');
+            if (!$produkKategori) {
+                throw new \Exception('Kategori tidak ditemukan');
+            }
+
+            $produk->update([
+                'name' => $request->input('name'),
+                'harga' => $request->input('harga'),
+                'deskripsi' => $request->input('deskripsi'),
+                'gambar' => $request->input('gambar'),
+                'produk_kategoris_id' => $produkKategori->id,
+            ]);
+
+            return redirect()->back()->with('success', 'Produk berhasil diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([$e->getMessage()]);
         }
-
-        $produk->update([
-            'name' => $request->input('name'),
-            'harga' => $request->input('harga'),
-            'deskripsi' => $request->input('deskripsi'),
-            'gambar' => $request->input('gambar'),
-            'produk_kategoris_id' => $produkKategori->id,
-        ]);
-
-        return redirect()->back()->with('success', 'Produk berhasil diperbarui');
-    } catch (\Exception $e) {
-        return redirect()->back()->withErrors([$e->getMessage()]);
     }
-}
 
     /**
      * Remove the specified resource from storage.
