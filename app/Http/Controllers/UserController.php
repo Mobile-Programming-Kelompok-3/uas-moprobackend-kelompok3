@@ -181,4 +181,13 @@ class UserController extends Controller
         $user->delete();
         return inertia::location(route('listuser'));
     }
+    public function logout(Request $request)
+    {
+        // Perform logout actions here, such as invalidating tokens, clearing session data, etc.
+        // For example, if you're using token-based authentication with Sanctum:
+        $request->user()->tokens()->delete();
+
+        // Assuming you want to redirect or respond with a message after logout
+        return response()->json(['message' => 'Logged out successfully']);
+    }
 }

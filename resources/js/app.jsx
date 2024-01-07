@@ -20,7 +20,7 @@ createInertiaApp({
 
         root.render(
             <>
-                <Favicon url="{/favicon.ico}" />
+                <Favicon url="{/favicon.png}" />
                 <App {...props} />
             </>
         );

@@ -43,17 +43,12 @@ export default function KelolaProduk(props) {
                             <h1 className="text-left font-bold text-[48px] text-black mr-4">
                                 Kelola Produk
                             </h1>
-
-                                <button onClick={() =>
-                                                    setAddProdukVisible(true)
-                                                }
-                                className="px-10 py-3 w-auto bg-pink-500 border border-transparent rounded-md font-semibold text-md text-white hover:bg-pink-800 focus:bg-pink-400 active:bg-pink-100 focus:outline-none transition ease-in-out duration-150">
+                                <button onClick={() => setAddProdukVisible(true)}className="px-10 py-3 w-auto bg-pink-500 border border-transparent rounded-md font-semibold text-md text-white hover:bg-pink-800 focus:bg-pink-400 active:bg-pink-100 focus:outline-none transition ease-in-out duration-150">
                                     <h1 className="text-base font-bold">
                                         Tambah Produk
                                     </h1>
                                 </button>
                         </div>
-
                         <div className="relative overflow-x-auto mt-10">
                             <table className="w-full text-lg text-left ">
                                 <thead className="text-lg  bg-pink-500 text-white">
@@ -80,7 +75,6 @@ export default function KelolaProduk(props) {
                                 </thead>
                                 <tbody>
                                     {props.produk.map((item) => (
-
                                             <tr key={item.id} className="bg-white border-b-2 text-lg">
                                                 <th
                                                     scope="row"

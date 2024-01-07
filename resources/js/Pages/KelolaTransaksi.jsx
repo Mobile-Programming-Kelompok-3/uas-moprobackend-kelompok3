@@ -86,15 +86,15 @@ export default function KelolaTransaksi(props) {
                                             ? product.name
                                             : "Product Not Found"}
                                     </h2>
-                                    <p className="text-3xl font-bold text-pink-500">
+                                    <p className="text-xl font-bold text-pink-500">
                                         Rp. {transaction.total_harga}
                                     </p>
-                                    <p className="text-xl font-bold text-gray-800">
+                                    <p className="text-l mt-2 text-gray-800" style={{ overflowWrap: "break-word" }} >
                                         catatan: {transaction.catatan}
                                     </p>
                                     <Link
                                         href={`/bukti_pembayaran/${transaction.id}`} // Replace with your desired URL
-                                        className="text-pink-500 hover:underline justify-end flex"
+                                        className="text-pink-500 hover:underline mb-5 justify-end flex"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

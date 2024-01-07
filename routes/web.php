@@ -37,6 +37,7 @@ Route::get('/', function () {
 Route::get('/', [UserController::class, 'index']);
 Route::post('/registers', [UserController::class, 'store']);
 Route::post('/logins', [UserController::class, 'login']);
+Route::post('/logout', [UserController::class, 'logout']);
 Route::get('/profils/{userid}', [UserController::class, 'profil']);
 Route::put('/profils/{userid}', [UserController::class, 'editprofil']);
 Route::get('/user', [UserController::class, 'show'])->name('listuser');

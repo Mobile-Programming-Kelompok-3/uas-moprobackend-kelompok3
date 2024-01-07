@@ -16,7 +16,7 @@ export default function EditProduk({ props, visible, onClose,options, editData }
         setGambar(file);
     };
 
-    
+
     useEffect(() => {
         if (editData) {
             setName(editData.name);
@@ -61,7 +61,7 @@ export default function EditProduk({ props, visible, onClose,options, editData }
             console.error('Error:', error);
         }
     };
-    
+
     function classNames(...classes) {
         return classes.filter(Boolean).join(" ");
     }
@@ -128,7 +128,7 @@ export default function EditProduk({ props, visible, onClose,options, editData }
                                                 leaveFrom="opacity-100"
                                                 leaveTo="opacity-0"
                                             >
-                                                <Listbox.Options className="absolute text-left z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                                <Listbox.Options className="absolute text-left z-10 mt-1 mb-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                                                     {options.map(
                                                         (option, index) => (
                                                             <Listbox.Option
@@ -190,7 +190,7 @@ export default function EditProduk({ props, visible, onClose,options, editData }
                                 )}
                             </Listbox>
                             <input
-                                className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-blue-500"
+                                className="w-full px-4 py-2 mb-4 mt-4 border rounded-md focus:outline-none focus:border-blue-500"
                                 type="number"
                                 placeholder="Harga"
                                 value={harga}
@@ -205,6 +205,7 @@ export default function EditProduk({ props, visible, onClose,options, editData }
                                 onChange={(e) => setDeskripsi(e.target.value)}
                             ></textarea>
                             <input
+                                className="mb-4"
                                 type="file"
                                 onChange={handleFileChange}
                             />
